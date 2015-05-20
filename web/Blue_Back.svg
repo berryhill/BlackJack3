@@ -1,0 +1,22 @@
+
+<pattern  x="222.547" y="676.681" width="744.095" height="1052.362" patternUnits="userSpaceOnUse" id="pattern13545-1" viewBox="0 -1052.362 744.095 1052.362" overflow="visible">
+	<g>
+		<polygon fill="none" points="0,0 744.095,0 744.095,-1052.362 0,-1052.362 		"/>
+	</g>
+</pattern>
+<sodipodi:namedview  id="base" inkscape:cy="529.84002" inkscape:zoom="0.7" inkscape:cx="256.76098" borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" showgrid="false" inkscape:window-x="30" inkscape:window-width="1320" inkscape:current-layer="printing-marks" inkscape:pageopacity="0.0" inkscape:document-units="px" inkscape:window-y="30" inkscape:window-height="932" inkscape:window-maximized="0" inkscape:pageshadow="2">
+	</sodipodi:namedview>
+<g id="layer1" inkscape:groupmode="layer" inkscape:label="BLUE_BACK">
+	<g id="cardBB" transform="translate(520.04751,-131.04053)">
+		<path id="rect13537" fill="#FFFFFF" stroke="#000000" d="M-248.484,501.816h200.969c5.871,0,10.629,4.759,10.629,10.63v289.551
+			c0,5.871-4.758,10.631-10.629,10.631h-200.969c-5.871,0-10.63-4.76-10.63-10.631V512.446
+			C-259.114,506.575-254.355,501.816-248.484,501.816z"/>
+		
+			<rect id="rect13539" x="-246.526" y="513.899" fill="none" stroke="#131F67" stroke-width="4.9524" stroke-linecap="round" width="197.052" height="286.645"/>
+		
+			<pattern  id="rect13541_1_" xlink:href="#pattern13545-1" patternTransform="matrix(-0.1106 0.1106 0.1106 0.1106 -7807.4751 -6993.3574)">
+		</pattern>
+		
+			<rect id="rect13541" x="-242.139" y="517.769" fill="url(#rect13541_1_)" stroke="#131F67" stroke-linecap="round" width="188.277" height="278.906"/>
+	</g>
+</g>

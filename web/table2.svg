@@ -1,0 +1,24 @@
+
+<g>
+	<g id="table">
+		<defs>
+			<rect id="SVGID_1_" x="-65.5" width="376" height="196"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<g id="_x23_brownWood" clip-path="url(#SVGID_2_)">
+			
+				<image overflow="visible" opacity="0.75" width="1097" height="1097" xlink:href="C69797A3DD9AFD57.png"  transform="matrix(0.24 0 0 0.24 -9.1367 -124.6367)">
+			</image>
+			<g>
+				<circle fill="#18110E" cx="122.5" cy="0" r="116.637"/>
+			</g>
+		</g>
+		
+			<circle id="carpet" clip-path="url(#SVGID_2_)" fill="#006838" stroke="#414042" stroke-miterlimit="10" cx="122.5" cy="0" r="104.739"/>
+		<path clip-path="url(#SVGID_2_)" d="M122.5,105.239C64.471,105.239,17.261,58.029,17.261,0S64.471-105.239,122.5-105.239
+			S227.739-58.029,227.739,0S180.529,105.239,122.5,105.239z M122.5-104.239C65.022-104.239,18.261-57.478,18.261,0
+			S65.022,104.239,122.5,104.239S226.739,57.478,226.739,0S179.978-104.239,122.5-104.239z"/>
+	</g>
+</g>

@@ -1,0 +1,32 @@
+body{
+	background-image: url(casino_hotel_carpet_seamless_by_hhh316-d5jvnh8.jpg);
+}
+.container{
+	width: 100%;
+	margin: auto;
+	max-width: 1200px;
+}
+#table{
+	width: 100%;
+	height: 100%;
+}
+#Layer_1{
+	width: 100% !important;
+}
+.hide{
+	display: none;
+}
+.show{
+	display: inline-block;
+}
+#score{
+	position: absolute;
+	top: 0;
+	color: white;
+	background-color: rgba(0,0,0,.8)
+}
+#controls{
+	position: absolute;
+	right: 0;
+	top:0;
+}
