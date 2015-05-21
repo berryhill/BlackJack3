@@ -54,22 +54,35 @@ $(document).ready(function(){
 	    var userCardCount = 0;
 	    var dealerCardCount = 0;
             
-            $('#deckStack').click(function(){ 
+            $('#deal').click(function(){ 
+                cardDealer("u, H6, H7, CA, C9");
+            });  
+            $('#hit').click(function(){ 
+                cardDealer('hit, C8')
+            });
+            function cardDealer(name){
                 var msg = [1,2,3,4];
                     $.ajax({
                     url : "JsonServlet",   
 
                     data : {
-                        name: "john"
+                        name: name
                         
                     },
                     type:"POST",
 
                     success : function(data){
                         // console.log( data.split(', ') );
-                        console.log( data )
-                        // alert("called "+data);
-                        // deal( data );
+                        console.log( data );
+                        var ajaxArray = data.split(', ');
+                        console.log('ajaxArray: ' + ajaxArray)
+                        console.log('aj array: '+ajaxArray[0]);
+                        var u = ajaxArray[0];
+                        var c1 = ajaxArray[1];
+                        var c2 = ajaxArray[2];
+                        var c3 = ajaxArray[3];
+                        var c4 = ajaxArray[4];
+                        deal(u, c1, c2, c3, c4);
                     },
 
                     error: function(xhr, status){
@@ -80,8 +93,7 @@ $(document).ready(function(){
                     }
          
                 });
-            });  
-
+            }
 
 	    /* $('#deckStack').click(function(){
 	    	if (userScore > 21){
@@ -101,16 +113,45 @@ $(document).ready(function(){
 
     	$('#deal').click(deal);
 
-    	function deal(card1){
-    		$('#deal').unbind('click')
+    	function deal(u, c1, c2, c3, c4){
+                var dealArray = [c1, c2, c3, c4]
+                if(u == "u"){
+                    for(var i = 0; i < dealArray.length; i++){
+                        if(i < 2){
+                            var cardGen = Snap('#'+ dealArray[i] );
+                            userLayout(cardGen);
+                             userCardCount++;
+                             console.log(cardGen)
+                        }
+                        if(i > 2){
+                            var cardGen = Snap('#'+ dealArray[i] );
+                            dealerLayout(cardGen);
+                             dealerCardCount++;
+                             console.log("over 2: "+cardGen)                         
+                        }
+                    }
+                }else if(u == "p"){
+                            var cardGen = Snap('#'+ dealArray[0] );
+                            userLayout(cardGen);
+                             userCardCount++;
+                }else if(u == "d"){
+                            var cardGen = Snap('#'+ dealArray[0] );
+                            dealerLayout(cardGen);
+                             dealerCardCount++;
+                }else if(u == "hit"){
+                            var cardGen = Snap('#'+ dealArray[0] );
+                            userLayout(cardGen);
+                            playerCardCount++;
+                }
+    		
     			// var randomPick = randomGen();
     			// var randomPick2 = randomGen();
-		    	var cardGen = Snap('#'+ card1 );
+		    	
 		    	// var cardGen2 = Snap('#'+ card2 );
-		    	userLayout(cardGen);
-		    	// dealerLayout(cardGen2);
-		    	userCardCount++;
-		    	// dealerCardCount++;
+		    	
+		    	
+		    	
+		    	
     	}
 
 
@@ -132,7 +173,7 @@ $(document).ready(function(){
 		        cardGen.animate({transform: 'matrix(1,0,0,1,-982,1175)'}, 500, function(){
 		    		cardGen.drag();
 		    		console.log(userCardCount)
-		    		
+                                
 		    	})
 		        break;
 		    case 1:
