@@ -38,8 +38,10 @@ $(document).ready(function(){
 
 
 		function randomGen(){
-	        var randomCard = cardArray[Math.floor(cardArray.length * Math.random())];
-	        var randomSuite = suiteArray[Math.floor(suiteArray.length * Math.random())];
+	        var randomCard = cardArray[Math.floor(cardArray.length 
+                            * Math.random())];
+	        var randomSuite = suiteArray[Math.floor(suiteArray.length 
+                            * Math.random())];
 	        var randomPick = randomSuite + randomCard;
 	        console.log(randomPick);
 	        dealt.push(randomPick)
@@ -51,9 +53,49 @@ $(document).ready(function(){
 	    var cardGen = Snap('#SK');
 	    var userCardCount = 0;
 	    var dealerCardCount = 0;
+            
+            $('#deal').click(function(){ 
+                cardDealer("u, H6, H7, CA, C9");
+            });  
+            $('#hit').click(function(){ 
+                cardDealer('hit, C8')
+            });
+            function cardDealer(name){
+                var msg = [1,2,3,4];
+                    $.ajax({
+                    url : "JsonServlet",   
 
+                    data : {
+                        name: name
+                        
+                    },
+                    type:"POST",
 
-	    $('#deckStack').click(function(){
+                    success : function(data){
+                        // console.log( data.split(', ') );
+                        console.log( data );
+                        var ajaxArray = data.split(', ');
+                        console.log('ajaxArray: ' + ajaxArray)
+                        console.log('aj array: '+ajaxArray[0]);
+                        var u = ajaxArray[0];
+                        var c1 = ajaxArray[1];
+                        var c2 = ajaxArray[2];
+                        var c3 = ajaxArray[3];
+                        var c4 = ajaxArray[4];
+                        deal(u, c1, c2, c3, c4);
+                    },
+
+                    error: function(xhr, status){
+                        // alert("error : "+status);
+                    },
+                    complete: function(xhr, status){
+                        // alert("complete"+status);
+                    }
+         
+                });
+            }
+
+	    /* $('#deckStack').click(function(){
 	    	if (userScore > 21){
 	    		$('#deckStack').unbind('click');
 
@@ -66,29 +108,59 @@ $(document).ready(function(){
 		    	scoreKeeper(randomPick);
 		    	dealerCardCount++;		
 	    	}
-    	})
+    	}) */
+        
 
     	$('#deal').click(deal);
 
-    	function deal(){
-    		$('#deal').unbind('click')
-    		for(var i = 0; i < 2; i++){
-    			var randomPick = randomGen();
-    			var randomPick2 = randomGen();
-		    	var cardGen = Snap('#'+ randomPick )
-		    	var cardGen2 = Snap('#'+ randomPick2 )
-		    	userLayout(cardGen);
-		    	dealerLayout(cardGen2);
-		    	userCardCount++;
-		    	dealerCardCount++;
-    		}
+    	function deal(u, c1, c2, c3, c4){
+                var dealArray = [c1, c2, c3, c4]
+                if(u == "u"){
+                    for(var i = 0; i < dealArray.length; i++){
+                        if(i < 2){
+                            var cardGen = Snap('#'+ dealArray[i] );
+                            userLayout(cardGen);
+                             userCardCount++;
+                             console.log(cardGen)
+                        }
+                        if(i > 2){
+                            var cardGen = Snap('#'+ dealArray[i] );
+                            dealerLayout(cardGen);
+                             dealerCardCount++;
+                             console.log("over 2: "+cardGen)                         
+                        }
+                    }
+                }else if(u == "p"){
+                            var cardGen = Snap('#'+ dealArray[0] );
+                            userLayout(cardGen);
+                             userCardCount++;
+                }else if(u == "d"){
+                            var cardGen = Snap('#'+ dealArray[0] );
+                            dealerLayout(cardGen);
+                             dealerCardCount++;
+                }else if(u == "hit"){
+                            var cardGen = Snap('#'+ dealArray[0] );
+                            userLayout(cardGen);
+                            playerCardCount++;
+                }
+    		
+    			// var randomPick = randomGen();
+    			// var randomPick2 = randomGen();
+		    	
+		    	// var cardGen2 = Snap('#'+ card2 );
+		    	
+		    	
+		    	
+		    	
     	}
 
 
 		function randomGen(){
 
-	        var randomCard = cardArray[Math.floor(cardArray.length * Math.random())];
-	        var randomSuite = suiteArray[Math.floor(suiteArray.length * Math.random())];
+	        var randomCard = cardArray[Math.floor(cardArray.length 
+                            * Math.random())];
+	        var randomSuite = suiteArray[Math.floor(suiteArray.length 
+                            * Math.random())];
 	        var randomPick = randomSuite + randomCard;
 	        console.log(randomPick);
 	        dealt.push(randomPick)
@@ -97,76 +169,76 @@ $(document).ready(function(){
 
 	    function userLayout(cardGen){
 	    	switch(userCardCount) {
-			    case 0:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-982,1175)'}, 500, function(){
-			    		cardGen.drag();
-			    		console.log(userCardCount)
-			    		
-			    	})
-			        break;
-			    case 1:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-691,1175)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 2:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-1250,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 3:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-1150,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 4:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-1050,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 5:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-950,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 6:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-850,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 7:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-750,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 8:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-650,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 9:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-550,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 10:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-450,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 11:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-350,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    case 12:
-			        cardGen.animate({transform: 'matrix(1,0,0,1,-250,840)'}, 500, function(){
-			    		cardGen.drag();
-			    	})
-			        break;
-			    default:
-			        console.log('default')
-			}
+		    case 0:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-982,1175)'}, 500, function(){
+		    		cardGen.drag();
+		    		console.log(userCardCount)
+                                
+		    	})
+		        break;
+		    case 1:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-691,1175)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 2:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-1250,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 3:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-1150,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 4:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-1050,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 5:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-950,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 6:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-850,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 7:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-750,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 8:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-650,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 9:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-550,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 10:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-450,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 11:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-350,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    case 12:
+		        cardGen.animate({transform: 'matrix(1,0,0,1,-250,840)'}, 500, function(){
+		    		cardGen.drag();
+		    	})
+		        break;
+		    default:
+		        console.log('default')
+		}
 	    }
 
 	    function dealerLayout(cardGen){
